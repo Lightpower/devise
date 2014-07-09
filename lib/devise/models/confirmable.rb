@@ -218,7 +218,10 @@ module Devise
         # Generates a new random token for confirmation, and stores
         # the time this token is being generated
         def generate_confirmation_token
+          logger = Logger.new('log/confirm.log')
           raw, enc = Devise.token_generator.generate(self.class, :confirmation_token)
+          logger.debug("User id: #{self.try(:id)}, email: #{self.try(:email)}, raw: #{raw}, enc: #{enc}")
+
           @raw_confirmation_token   = raw
           self.confirmation_token   = enc
           self.confirmation_sent_at = Time.now.utc
