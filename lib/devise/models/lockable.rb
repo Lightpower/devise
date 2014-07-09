@@ -127,7 +127,7 @@ module Devise
       protected
 
         def attempts_exceeded?
-          self.failed_attempts >= self.class.maximum_attempts
+          self.failed_attempts > self.class.maximum_attempts
         end
 
         def last_attempt?
